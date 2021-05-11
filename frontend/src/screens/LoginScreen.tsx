@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap'
 const LoginScreen = () => {
   return (
     <FormContainer>
+      <h1 className='my-3'>Login</h1>
       <Form>
         <Form.Group controlId='email'>
           <Form.Label>Email address</Form.Label>
@@ -15,7 +16,7 @@ const LoginScreen = () => {
           <Form.Control type='password' placeholder='Password' />
         </Form.Group>
 
-        <Button variant='primary' type='submit'>
+        <Button variant='primary' type='submit' className='my-3'>
           Login
         </Button>
       </Form>

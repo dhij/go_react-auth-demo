@@ -10,6 +10,7 @@ const SignupScreen = () => {
 
   return (
     <FormContainer>
+      <h1 className='my-3'>Sign Up</h1>
       <Form>
         <Form.Group controlId='firstName'>
           <Form.Label>First Name</Form.Label>
@@ -51,7 +52,7 @@ const SignupScreen = () => {
           />
         </Form.Group>
 
-        <Button variant='primary' type='submit'>
+        <Button variant='primary' type='submit' className='my-3'>
           Login
         </Button>
       </Form>
