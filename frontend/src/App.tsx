@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { Container } from 'react-bootstrap'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { RouteComponentProps, withRouter } from 'react-router'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
@@ -27,7 +27,7 @@ const App = ({ history }: Props) => {
   })
 
   return (
-    <Router>
+    <>
       <Header firstName={firstName} setFirstName={setFirstName} />
       <main>
         <Container>
@@ -46,7 +46,7 @@ const App = ({ history }: Props) => {
         </Container>
       </main>
       <Footer />
-    </Router>
+    </>
   )
 }
 
