@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom'
 import { RouteComponentProps, withRouter } from 'react-router'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
-import SignupScreen from './screens/SignupScreen'
+import SignupScreen from './screens/SignUpScreen'
 
 interface Props {
   history: RouteComponentProps['history']
