@@ -1,5 +1,5 @@
+import { SyntheticEvent } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
 
 interface Props {
   firstName: string
@@ -7,43 +7,36 @@ interface Props {
 }
 
 const Header = ({ firstName, setFirstName }: Props) => {
-  const logoutHandler = async () => {
+  const logoutHandler = async (e: SyntheticEvent) => {
+    e.preventDefault()
+
     await fetch('http://localhost:8081/api/logout', {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     })
+
     setFirstName('')
   }
 
   return (
-    <>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
-        <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>Go React Auth</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
-            {firstName ? (
-              <Nav className='ms-auto'>
-                <LinkContainer to='/login'>
-                  <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
-                </LinkContainer>
-              </Nav>
-            ) : (
-              <Nav className='ms-auto'>
-                <LinkContainer to='/signup'>
-                  <Nav.Link>Sign Up</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/login'>
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-              </Nav>
-            )}
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </>
+    <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Container>
+        <Navbar.Brand href='/'>Go React Auth</Navbar.Brand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          {firstName ? (
+            <Nav className='ms-auto'>
+              <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
+            </Nav>
+          ) : (
+            <Nav className='ms-auto'>
+              <Nav.Link href='/signup'>Sign Up</Nav.Link>
+              <Nav.Link href='/login'>Login</Nav.Link>
+            </Nav>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   )
 }
 
