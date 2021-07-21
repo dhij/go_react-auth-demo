@@ -53,7 +53,7 @@ const LoginScreen = ({ history }: Props) => {
         </Form.Group>
 
         <Button variant='primary' type='submit' className='my-3'>
-          Submit
+          Login
         </Button>
       </Form>
     </FormContainer>

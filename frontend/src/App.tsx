@@ -8,7 +8,8 @@ import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignupScreen'
 
-function App() {
+
+const App = () => {
   const [firstName, setFirstName] = useState('')
 
   useEffect(() => {
@@ -17,13 +18,14 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       })
-
+      
       const data = await response.json()
       setFirstName(data.first_name)
     })()
   })
 
   return (
+
     <Router>
       <Header firstName={firstName} setFirstName={setFirstName} />
       <main>
