@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react'
+import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { Container } from 'react-bootstrap'
-import { Route } from 'react-router-dom'
-import { RouteComponentProps, withRouter } from 'react-router'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignUpScreen'
 
-interface Props {
-  history: RouteComponentProps['history']
-}
 
-const App = ({ history }: Props) => {
+const App = () => {
   const [firstName, setFirstName] = useState('')
 
   useEffect(() => {
@@ -21,33 +18,30 @@ const App = ({ history }: Props) => {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       })
+      
       const data = await response.json()
       setFirstName(data.first_name)
     })()
   })
 
   return (
-    <>
+
+    <Router>
       <Header firstName={firstName} setFirstName={setFirstName} />
       <main>
         <Container>
           <Route
             path='/'
             exact
-            component={() => <HomeScreen name={firstName} />}
-          />
-          <Route
-            path='/login'
-            component={() => (
-              <LoginScreen setFirstName={setFirstName} history={history} />
-            )}
+            component={() => <HomeScreen firstName={firstName} />}
           />
           <Route path='/signup' component={SignupScreen} />
+          <Route path='/login' component={LoginScreen} />
         </Container>
       </main>
       <Footer />
-    </>
+    </Router>
   )
 }
 
-export default withRouter(App)
+export default App
