@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from 'react'
 import FormContainer from '../components/FormContainer'
+import { RouteComponentProps } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { RouteComponentProps } from 'react-router'
 
 interface Props {
   history: RouteComponentProps['history']
@@ -16,7 +16,6 @@ const SignupScreen = ({ history }: Props) => {
   const submitHandler = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    // interact with the backend
     await fetch('http://localhost:8081/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -33,8 +32,8 @@ const SignupScreen = ({ history }: Props) => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
-      <Form onSubmit={submitHandler}>
+      <h1 className='my-3'>Sign Up</h1>
+      <Form onSubmit={submitHandler} className='py-3'>
         <Form.Group controlId='firstName' className='my-3'>
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -59,7 +58,7 @@ const SignupScreen = ({ history }: Props) => {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type='email'
-            placeholder='Enter your email'
+            placeholder='Enter your email address'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -69,14 +68,14 @@ const SignupScreen = ({ history }: Props) => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Password'
+            placeholder='Enter your password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
 
         <Button variant='primary' type='submit' className='my-3'>
-          Submit
+          Sign Up
         </Button>
       </Form>
     </FormContainer>
