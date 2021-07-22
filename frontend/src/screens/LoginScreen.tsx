@@ -1,7 +1,10 @@
 import { SyntheticEvent, useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import FormContainer from '../components/FormContainer'
+import { login } from '../actions/userActions'
+import { UserState } from '../reducers/userReducers'
 
 interface Props {
   history: RouteComponentProps['history']
@@ -11,19 +14,24 @@ const LoginScreen = ({ history }: Props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const dispatch = useDispatch()
+  const userLogin = useSelector<UserState, UserState>((state) => state)
+  const { loading, error, userInfo } = userLogin
+
   const submitHandler = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    // interact with the backend using fetch
-    await fetch('http://localhost:8081/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
+    // await fetch('http://localhost:8081/api/login', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   credentials: 'include',
+    //   body: JSON.stringify({
+    //     email,
+    //     password,
+    //   }),
+    // })
+
+    dispatch(login(email, password))
 
     history.push('/')
   }
