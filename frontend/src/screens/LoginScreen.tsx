@@ -1,10 +1,11 @@
-import { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent, useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 import { UserState } from '../reducers/userReducers'
+import { RootState } from '../store'
 
 interface Props {
   history: RouteComponentProps['history']
@@ -15,25 +16,19 @@ const LoginScreen = ({ history }: Props) => {
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
-  const userLogin = useSelector<UserState, UserState>((state) => state)
-  const { loading, error, userInfo } = userLogin
+  const userLogin = useSelector<RootState, UserState>(
+    (state: RootState) => state.userLogin
+  )
+  const { userInfo } = userLogin
+  useEffect(() => {
+    if (userInfo !== undefined && userInfo.firstName) {
+      history.push('/')
+    }
+  }, [userInfo, history])
 
   const submitHandler = async (e: SyntheticEvent) => {
     e.preventDefault()
-
-    // await fetch('http://localhost:8081/api/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   credentials: 'include',
-    //   body: JSON.stringify({
-    //     email,
-    //     password,
-    //   }),
-    // })
-
     dispatch(login(email, password))
-
-    history.push('/')
   }
 
   return (

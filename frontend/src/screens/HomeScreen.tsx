@@ -1,12 +1,17 @@
-import React from 'react'
+import { useSelector } from 'react-redux'
+import { UserState } from '../reducers/userReducers'
+import { RootState } from '../store'
 
-interface Props {
-  firstName: string
-}
+const HomeScreen = () => {
+  const userLogin = useSelector<RootState, UserState>(
+    (state: RootState) => state.userLogin
+  )
 
-const HomeScreen = ({ firstName }: Props) => {
+  const { userInfo } = userLogin
+  const firstName = userInfo ? userInfo.firstName : null
+
   return firstName ? (
-    <h1>Welcome {firstName}!</h1>
+    <h1>Welcome {firstName}</h1>
   ) : (
     <h1>Welcome to the Home Page!</h1>
   )
