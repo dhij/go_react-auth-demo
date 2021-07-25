@@ -8,7 +8,7 @@ const HomeScreen = () => {
   )
 
   const { userInfo } = userLogin
-  const firstName = userInfo.firstName
+  const firstName = userInfo ? userInfo.firstName : null
 
   return firstName ? (
     <h1>Welcome {firstName}</h1>

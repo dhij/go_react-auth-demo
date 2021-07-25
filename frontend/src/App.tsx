@@ -9,11 +9,9 @@ import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignupScreen'
 
 const App = () => {
-  const [firstName, setFirstName] = useState('')
-
   return (
     <Router>
-      <Header firstName={firstName} setFirstName={setFirstName} />
+      <Header />
       <main>
         <Container>
           <Route path='/' exact component={HomeScreen} />

@@ -50,3 +50,15 @@ export const login =
       })
     }
   }
+
+export const logout =
+  (): ThunkAction<void, RootState, unknown, AnyAction> =>
+  async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
+    localStorage.removeItem('userInfo')
+    dispatch({ type: USER_LOGOUT })
+
+    await fetch('http://localhost:8081/api/logout', {
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+    })
+  }
