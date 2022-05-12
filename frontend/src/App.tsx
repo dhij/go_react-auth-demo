@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
-import SignupScreen from './screens/SignupScreen'
+import SignupScreen from './screens/SignScreen'
 
 const App = () => {
   return (
